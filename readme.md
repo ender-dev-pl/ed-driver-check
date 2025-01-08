@@ -24,6 +24,30 @@ Aplikacja do sprawdzania uprawnień kierowców, która oferuje dwa tryby pracy: 
 ### **Uruchamianie aplikacji**
 Aplikacja domyślnie uruchamia tryb graficzny, jeśli nie zostaną podane żadne argumenty.
 
+![screenshot](media/window.png)
+
 ```bash
 python main.py
+````
 
+```cmd
+> ed-driver-check.exe -h
+usage: ed-driver-check.exe [-h] [--cli] [--gui] [--file FILE] [--output_file OUTPUT_FILE] [--template TEMPLATE]
+
+Aplikacja do sprawdzania uprawnień kierowców.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --cli                 Uruchamia aplikację w trybie wiersza poleceń (CLI).
+  --gui                 Uruchamia aplikację w trybie graficznym (GUI).
+  --file FILE           Ścieżka do istniejącego pliku Excel z danymi do sprawdzenia (tylko w trybie CLI).
+  --output_file OUTPUT_FILE
+                        Ścieżka do wyjściowego pliku Excel (tylko w trybie CLI).
+  --template TEMPLATE   Ścieżka do nowego pliku Excel zawierającego pusty szablon danych (tylko w trybie CLI).
+
+Przykłady użycia:
+  ed-driver-check.exe --cli --file dane.xlsx
+  ed-driver-check.exe --cli --file dane.xlsx --output_file dane_pelne.xlsx
+  ed-driver-check.exe --gui
+  ed-driver-check.exe
+```
