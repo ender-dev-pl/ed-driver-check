@@ -5,10 +5,19 @@ Moduł GUI do obsługi interaktywnej aplikacji.
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import ttk, messagebox
-from tkinter import ttk
+from tkinter import ttk, PhotoImage
 from openpyxl import load_workbook
 from eddc.api import process_driver_data
+import os
+import sys
 
+def resource_path(relative_path):
+    """ Znajdź zasób nawet po spakowaniu PyInstallerem """
+    try:
+        base_path = sys._MEIPASS
+    except AttributeError:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 def run_gui():
     """
@@ -171,6 +180,14 @@ def run_gui():
     # Konfiguracja okna głównego
     root = tk.Tk()
     root.title("ED-Driver-Check - Sprawdzanie uprawnień kierowców by EnderDEV")
+
+    icon_path = resource_path("ico.ico")
+    root.iconbitmap(icon_path)
+
+    logo = PhotoImage(file=resource_path("ed_sq_t.png"))
+    logo_label = ttk.Label(root, image=logo)
+    logo_label.image = logo
+    logo_label.grid(row=0, column=0, columnspan=2, pady=0, padx=0, sticky="e")
 
     # Konfiguracja stylu dla ramek
     style = ttk.Style()
