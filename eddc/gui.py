@@ -255,7 +255,7 @@ def run_gui():
 
 
     # Tabela wyników
-    columns = ("Nr", "Kierowca", "Nr dokumentu", "Typ dokumentu", "Seria i numer", "Organ wydający", "Ważność", "Status dokumentu", "Kategorie")
+    columns = ("Nr", "Kierowca", "Nr blankietu", "Typ dokumentu", "Seria i numer", "Organ wydający", "Ważność", "Status dokumentu", "Kategorie")
     tree = ttk.Treeview(root, columns=columns, show="headings", height=10)
     for col in columns:
         tree.heading(col, text=col)
