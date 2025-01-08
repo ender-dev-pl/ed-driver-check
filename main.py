@@ -4,8 +4,8 @@ Główny moduł aplikacji, który dynamicznie uruchamia CLI lub GUI na podstawie
 
 import argparse
 import sys
-from eddc import cli, gui
 
+from eddc import cli, gui
 
 def setup_argparse():
     """
@@ -13,11 +13,20 @@ def setup_argparse():
 
     :return: Przeparsowane argumenty.
     """
+
+    if getattr(sys, 'frozen', False):
+        # Uruchamiana jako exe
+        arg0 = sys.argv[0]
+    else:
+        arg0 = "python main.py"
+
     parser = argparse.ArgumentParser(
         description="Aplikacja do sprawdzania uprawnień kierowców.",
         epilog="Przykład użycia:\n"
-               "  python main.py --cli --file dane.xlsx\n"
-               "  python main.py --gui",
+               f"  {arg0} --cli --file dane.xlsx\n"
+               f"  {arg0} --cli --file dane.xlsx --output_file dane_pelne.xlsx\n"
+               f"  {arg0} --gui\n"
+               f"  {arg0}",
         formatter_class=argparse.RawTextHelpFormatter
     )
 
@@ -52,7 +61,6 @@ def setup_argparse():
     )
 
     return parser.parse_args()
-
 
 def main():
     """

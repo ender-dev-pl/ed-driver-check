@@ -8,6 +8,7 @@ from tkinter import ttk, messagebox
 from tkinter import ttk, PhotoImage
 from openpyxl import load_workbook
 from eddc.api import process_driver_data
+from eddc.utils import create_template_file
 import os
 import sys
 
@@ -25,6 +26,27 @@ def run_gui():
     """
     loaded_file = {"path": None}  # Przechowywanie załadowanego pliku
 
+    def save_template():
+        """
+        Otwiera okno zapisu pliku i zapisuje szablon arkusza.
+        """
+        try:
+            # Otwórz okno dialogowe do wyboru lokalizacji zapisu
+            file_path = filedialog.asksaveasfilename(
+                defaultextension=".xlsx",
+                filetypes=[("Excel files", "*.xlsx")],
+                title="Zapisz szablon"
+            )
+
+            if not file_path:
+                return
+
+            # Zapisz szablon
+            create_template_file(file_path)
+            messagebox.showinfo("Sukces", f"Szablon został zapisany: {file_path}")
+        except Exception as e:
+            messagebox.showerror("Błąd zapisu", f"Nie udało się zapisać pliku: {str(e)}")
+
     def load_file():
         """
         Załaduj plik Excel i wyświetl wstępne dane w tabeli.
@@ -41,6 +63,11 @@ def run_gui():
             loaded_file["path"] = file_path
 
             for row_index, row in enumerate(sheet.iter_rows(min_row=2, values_only=True), start=1):
+
+                # ograniczenie do max 100 wierszy
+                if row_index > 100:
+                    break
+
                 first_name = row[0] or ""
                 last_name = row[1] or ""
                 document_number = row[2] or ""
@@ -217,11 +244,14 @@ def run_gui():
     button_frame = ttk.LabelFrame(root, style="TFrame", text = "Sprawdzenie zbiorowe")
     button_frame.grid(row=6, column=0, columnspan=2, pady=5, padx=5)
 
-    # Przycisk do załadowania pliku Excel
+    # Przycisk do wygenerowania szablonu pliku Excel
+    ttk.Button(button_frame, text="Wygeneruj szablon", command=save_template).pack(side="left", padx=5)
+
+    # Przycisk do załadowania pliku z danymi
     ttk.Button(button_frame, text="Załaduj plik Excel", command=load_file).pack(side="left", padx=5)
 
     # Przycisk do przetworzenia pliku
-    ttk.Button(button_frame, text="Przetwórz plik", command=process_file).pack(side="left", padx=5)
+    ttk.Button(button_frame, text="Przetwórz plik", style="", command=process_file).pack(side="left", padx=5)
 
 
     # Tabela wyników

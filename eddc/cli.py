@@ -2,7 +2,7 @@
 Moduł CLI do obsługi aplikacji w wierszu poleceń.
 """
 
-import argparse
+import sys
 from eddc.utils import create_template_file
 from eddc.file_processor import update_xlsx
 
@@ -13,6 +13,7 @@ def run_cli(args):
 
     :param args: Argumenty przekazane z main.py w formie Namespace.
     """
+
     if args.template:
         create_template_file(args.template)
         print(f"Szablon został zapisany w: {args.template}")
