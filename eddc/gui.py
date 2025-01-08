@@ -233,7 +233,7 @@ def run_gui():
     entry_last_name = ttk.Entry(form_frame)
     entry_last_name.grid(row=1, column=1, padx=5, pady=5, sticky="we")
 
-    ttk.Label(form_frame, text="Numer dokumentu:").grid(row=2, column=0, padx=(10,0), sticky="e")
+    ttk.Label(form_frame, text="Numer blankietu:").grid(row=2, column=0, padx=(10,0), sticky="e")
     entry_doc_number = ttk.Entry(form_frame)
     entry_doc_number.grid(row=2, column=1, padx=5, pady=5, sticky="we")
 
