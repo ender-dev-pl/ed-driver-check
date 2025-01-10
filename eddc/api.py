@@ -14,7 +14,7 @@ def process_driver_data(first_name, last_name, document_number):
 
     :param first_name: Imię kierowcy.
     :param last_name: Nazwisko kierowcy.
-    :param document_number: Numer dokumentu kierowcy.
+    :param document_number: Numer dokumentu kierowcy. (pole "nr blankietu")
     :return: JSON z odpowiedzią API lub słownik z kluczem "error" w przypadku błędu.
     """
     if not first_name or not last_name or not document_number:
